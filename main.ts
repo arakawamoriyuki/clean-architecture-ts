@@ -19,12 +19,11 @@ abstract class ControllerPort {
 type Memory = number[]
 
 // Interactor
-class GameMachine extends ControllerPort {
+class GameMachine implements ControllerPort {
   port: HdmiPort;
   storage: MemoryStorage;
 
   constructor(port: HdmiPort, storage: MemoryStorage) {
-    super();
     this.port = port;
     this.storage = storage;
   }
@@ -104,11 +103,10 @@ class Controller {
 }
 
 // Presenter
-class HdmiCable extends HdmiPort {
+class HdmiCable implements HdmiPort {
   display: Display;
 
   constructor(display: Display) {
-    super();
     this.display = display;
   }
 
@@ -143,7 +141,7 @@ class HdmiCable extends HdmiPort {
 // ----- infrastructure -----
 
 // View
-class ELDisplay extends Display {
+class ELDisplay implements Display {
   render(data: HdmiData) {
     console.log('ELDisplay#render');
     // dataを表示
@@ -152,7 +150,7 @@ class ELDisplay extends Display {
 }
 
 // DataAccessの実装
-class MemoryCard extends MemoryStorage {
+class MemoryCard implements MemoryStorage {
   white(memory: Memory) {
     console.log('MemoryCard#white');
     // TODO: memoryの保存処理
